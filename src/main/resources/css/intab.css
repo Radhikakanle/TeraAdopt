@@ -1,0 +1,119 @@
+.ui-tabs.ui-tabs-vertical {
+	padding: 0;
+	width: 100vw;
+	border: 0px;
+	top: -8px;
+	left: -8px;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-widget-header {
+	border: none;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
+	float: left;
+	width: 22em;
+	height: 100vh;
+	background-color:#26577C;
+	border-radius: 0px 0 0 0px;
+	border-right: 0px;
+	margin-top: -10px;
+    margin-left: -54px;
+    
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
+	clear: left;
+	width: 100%;
+	margin: 0.0em 0;
+	border: 1px solid gray;
+	border-width: 0px 0 0px 0px;
+	border-radius: 0px 0 0 0px;
+	overflow: hidden;
+	position: relative;
+	right: 0px;
+	z-index: 2;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
+	display: block;
+	width: 100%;
+	padding: 0.8em 1em;
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
+	cursor: pointer;
+	
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+	margin-bottom: 0.2em;
+	padding-bottom: 0;
+	border-right: 0px solid white;
+	background-color: white;
+	color: black;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
+	margin-bottom: 10px;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+	float: left;
+	width: 28em;
+	border-left: 0px solid gray;
+	border-radius: 0;
+	position: relative;
+	left: -1px;
+}
+
+.iclass {
+	display: block; /* iframes are inline by default */
+	border: none; /* Reset default border */
+	height: 100vh; /* Viewport-relative units */
+	width: 80vw;
+}
+
+.ui-tabs-anchor {
+	cursor: text;
+	font-size: 14px;
+	border: 0px;
+	border-radius: 0px;	
+	padding-right: 8px;
+}
+
+
+.tabs {
+  list-style: none;
+  width: 200px;
+  float: left
+}
+
+.tabs a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  background: #fff;
+  color: #000;   
+  border-bottom: 1px solid #ccc;
+}
+
+.tabContent {
+  margin-left: 200px;
+  min-height: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.tabs a.active {
+  background: rgba(0,0,0,0.2);
+}
+.tabContent .tabBox {
+  display: none
+}
+.tabContent .activeTab {
+  display: block
+}
