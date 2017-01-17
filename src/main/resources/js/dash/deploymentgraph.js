@@ -75,11 +75,11 @@ $(document).ready(function() {
 		 var barChartData = {
 		            labels: datearray,
 		            datasets: [{
-		                label: 'DEV',
+		                label: 'UAT',
 		                backgroundColor: "orange",
 		                data: devarray
 		            }, {
-		                label: 'QA',
+		                label: 'PREPROD',
 		                backgroundColor: "yellow",
 		                data: qaarray
 		            },  {

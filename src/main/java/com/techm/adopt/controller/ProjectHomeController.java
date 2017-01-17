@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -200,47 +201,37 @@ public class ProjectHomeController {
 		}
 	}
 	
-	@RequestMapping(value="/buildIDs")
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/buildIDs", method=RequestMethod.GET)
 	public void getBuildIds(HttpServletRequest request,HttpServletResponse response){
-		
 		String projectname=session.getAttribute("currentProject").toString();
-			String url=Constants.BUILDIDS_PER_PROJ_URL+projectname;
+			//String url=Constants.BUILDIDS_PER_PROJ_URL+projectname;
+		
+		String url=Constants.buildids+projectname;
 			JSONObject output= restClientService.getOutputFromURL(url);
 			if(output!=null){
 				Boolean status=(Boolean) output.get("status").equals("success");
 				if(status){
 					JSONObject result=output.getJSONObject("reponseMap");
 					JSONArray array=result.getJSONArray("response");
+					System.out.println("response tab map:"+array);
 					response.setContentType("application/json");
 					try {
 						response.getWriter().write(array.toString());
 					} catch (IOException e) {
+						// TODO Auto-generated catch block
 						logger.error("@DeploymentReportsController :"+e.getMessage());
 					}
 				}
 			}
 	}
 	
-	@RequestMapping(value="/buildpipeline", method=RequestMethod.POST)
-	public void buildPromotion(HttpServletRequest request,HttpServletResponse response){
-		session=request.getSession(false);
-		String projectname=session.getAttribute("currentProject").toString();
-		String bid=request.getParameter("buildid");
-			String url=Constants.AUTOBUILD_URL+projectname+"/"+bid;
-			JSONObject output= restClientService.getOutputFromURL(url);
-			if(output!=null){
-				Boolean status=(Boolean) output.get("status").equals("success");
-				if(status){
-					JSONObject result=output.getJSONObject("response1");
-					response.setContentType("application/json");
-					try {
-						response.getWriter().write(result.get("jobStatus").toString());
-					} catch (IOException e) {
-						logger.error("@BuildReportsController :"+e.getMessage());
-					}
-				}
-			}
-	}
+	
 	
 	@RequestMapping("/projectdashboard")
 	public ModelAndView getProjectDashboard(HttpServletRequest request){
@@ -256,4 +247,205 @@ public class ProjectHomeController {
 			return new ModelAndView("redirect:invalidsession");
 		}
 	}
+	
+////////////////////////////////////
+	
+	
+//////////////////////////////////
+
+
+
+	
+	@RequestMapping(value="/buildpipeline", method=RequestMethod.GET)
+	public ModelAndView buildPromotion(HttpServletRequest request,HttpServletResponse response){
+		String projectname=session.getAttribute("currentProject").toString();
+		System.out.println("inside controller");
+		String bid=request.getParameter("buildid");
+		if(bid!=null){
+			/*String parameter= projectname+"_VERSION";
+			String url="http://172.19.82.18:8080/job/"+projectname+"_UAT"+"/buildWithParameters?"+parameter+"="+bid;
+			  
+			RestTemplate restTemplate=new RestTemplate();
+			
+			System.out.println("return of triggering jenkins url:"+restTemplate.getForObject(url,String.class));*/
+			String trun = Constants.TRUNCATE_TABLE+projectname;
+			JSONObject output1= restClientService.getOutputFromURL(trun);
+			String url=Constants.AUTOBUILD_URL+projectname+"/"+bid;
+			JSONObject output= restClientService.getOutputFromURL(url);
+			
+			if(output!=null){
+				Boolean status=(Boolean) output.get("status").equals("success");
+				if(status){
+					try {
+						Thread.sleep(10000);
+					}
+					catch(Exception e)
+					{
+						System.out.println(e);
+					}
+					return new ModelAndView("temp");
+					}
+				else {
+					return new ModelAndView("temp");
+				}
+			
+			
+	   }
+			return new ModelAndView("temp");
+		}
+	   else{
+			return new ModelAndView("temp","errmsg","please select valid Id");
+	   }
+}
+	
+
+	
+	@RequestMapping(value="/displaystatus", method=RequestMethod.GET)
+	public ModelAndView displaystatus(HttpServletRequest request,HttpServletResponse response){
+		String projectname=session.getAttribute("currentProject").toString();
+		
+		String url=Constants.CURRENT_JOB+projectname;
+		JSONObject output= restClientService.getOutputFromURL(url);
+		if(output!=null){
+			Boolean status=(Boolean) output.get("status").equals("success");
+			
+			if(status){
+				JSONObject result=output.getJSONObject("reponseMap");
+				JSONArray array=result.getJSONArray("response");
+				System.out.println("response array :"+array);
+				String runJob="";
+				try {
+					if(null!=String.valueOf(array.get(0))){
+						runJob=String.valueOf(array.get(0));
+					}
+					else{
+						runJob="";
+						
+					}
+				} catch (JSONException e) {
+					logger.error(e.getMessage());
+					runJob="";
+				}
+				
+				return new ModelAndView("JobStatus","jname",runJob);
+			}
+			else
+			{
+				return new ModelAndView("JobStatus");
+			}
+		
+		}
+		else{
+		return new ModelAndView("JobStatus");
+		}
+	
+	}
+	
+	
+	
+	@RequestMapping(value="/taskHistory", method=RequestMethod.POST)
+	public void taskDetails(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("inside task history");
+		String projectname=session.getAttribute("currentProject").toString();
+		String bid=request.getParameter("name");
+		System.out.println("bid in task history servlet:  "+ bid);
+		String url=Constants.TASKS_FOR_BUILD+projectname+"/"+bid;
+		JSONObject output= restClientService.getOutputFromURL(url);
+		if(output!=null){
+			Boolean status=(Boolean) output.get("status").equals("success");
+			if(status){
+				JSONObject result=output.getJSONObject("reponseMap");
+				JSONArray array=result.getJSONArray("response");
+				response.setContentType("application/json");
+				try {
+					response.getWriter().write(array.toString());
+				} catch (IOException e) {
+					logger.error("@DeploymentReportsController:Task Details :"+e.getMessage());
+				}
+			}
+		}
+	}
+	
+	
+	@RequestMapping(value="/pielinejobs", method=RequestMethod.GET)
+	public void getJobsStatus(HttpServletRequest request,HttpServletResponse response){
+		String projectname=session.getAttribute("currentProject").toString();
+		System.out.println(projectname);
+		String url=Constants.JOBS_STATUS+projectname;
+		JSONObject output= restClientService.getOutputFromURL(url);
+		System.out.println("inside pipeline jobs controller");
+		if(output!=null){
+			Boolean status=(Boolean) output.get("status").equals("success");
+			if(status){
+				JSONObject result=output.getJSONObject("reponseMap");
+				JSONArray array=result.getJSONArray("response");
+				response.setContentType("application/json");
+				try {
+					response.getWriter().write(array.toString());
+				} catch (IOException e) {
+					logger.error("@DeploymentReportsController:Jobs Details :"+e.getMessage());
+				}
+			}
+		}
+	}
+	
+	
+	/*
+	@RequestMapping(value="/getbuilds")
+	public void getbuilds(HttpServletRequest request,HttpServletResponse response){
+		
+		String projectname=session.getAttribute("currentProject").toString();
+			String url=Constants.DEPLOYMENT_HISTORY+projectname;
+			JSONObject output= restClientService.getOutputFromURL(url);
+			if(output!=null){
+				Boolean status=(Boolean) output.get("status").equals("success");
+				if(status){
+					JSONObject result=output.getJSONObject("reponseMap");
+					JSONArray array=result.getJSONArray("response");
+					System.out.println("result is"+result);
+					System.out.println("response is"+result);
+					response.setContentType("application/json");
+					try {
+						response.getWriter().write(array.toString());
+					} catch (IOException e) {
+						logger.error("@DeploymentReportsController :"+e.getMessage());
+					}
+				}
+			}*/
+	
+	
+	
+	
+
+	@RequestMapping(value="/getbuilds")
+	public void getbuilds(HttpServletRequest request,HttpServletResponse response){
+		
+		String projectname=session.getAttribute("currentProject").toString();
+			String url=Constants.READY_BUILDS +projectname;
+			JSONObject output= restClientService.getOutputFromURL(url);
+			if(output!=null){
+				Boolean status=(Boolean) output.get("status").equals("success");
+				if(status){
+					JSONObject result=output.getJSONObject("reponseMap");
+					JSONArray array=result.getJSONArray("response");
+					System.out.println("result is"+result);
+					System.out.println("response is"+result);
+					response.setContentType("application/json");
+					try {
+						response.getWriter().write(array.toString());
+					} catch (IOException e) {
+						logger.error("@DeploymentReportsController :"+e.getMessage());
+					}
+				}
+			}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

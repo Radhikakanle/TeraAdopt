@@ -1,0 +1,13 @@
+{
+   "p1": { 
+           			"jira": "http://10.53.67.23:7080/secure/Dashboard.jspa",
+		          "jenkins":"http://172.19.81.113:9093/jenkins/",
+		          "sonar": "http://10.53.67.23:9000/projects/",
+		          "bitbucket": "http://172.19.81.217:7990/",
+		          "tomcat": "http://172.19.81.217:6565/",
+		          "testlink": "http://10.53.67.10:8181/testlink/index.php"
+		          
+		          
+		          
+         }		 		 		 
+}

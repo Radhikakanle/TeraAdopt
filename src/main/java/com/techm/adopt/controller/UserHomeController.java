@@ -1,5 +1,7 @@
 package com.techm.adopt.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.techm.adopt.bean.LoginBean;
+import com.techm.adopt.service.ProjectDashboardService;
 import com.techm.adopt.service.RestClientService;
 import com.techm.adopt.util.Constants;
 
@@ -26,6 +29,10 @@ public class UserHomeController {
 	private RestClientService restClientService;
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private ProjectDashboardService projectDashboardService;
+	
 	
 	@RequestMapping("/selectrole")
 	public ModelAndView getSelectRolePage(){
@@ -166,4 +173,46 @@ public class UserHomeController {
 		}	
 		
 	}
-}
+	
+	
+	
+	/*public void submitProjectListForm(HttpServletResponse response, HttpServletRequest request){
+		logger.info("Submitting the Project form");
+		
+		
+		try {
+			String projectname=request.getParameter("projectname");		
+			session = request.getSession(false);
+			session.setAttribute("currentProject", projectname);
+			LoginBean loginUser=(LoginBean) session.getAttribute("loginUser");
+			String url=Constants.TABS_LIST_URL+"admin"+"/"+projectname;	
+			JSONObject output=restClientService.getOutputFromURL(url);
+			JSONArray result = null;
+			System.out.println("inside project submit form"+loginUser.getRoleName());
+			try {
+				if(loginUser.getAccessControl().isProjectLevelAccess()){
+					//response.sendRedirect("projecthome");
+					if(output!=null){
+						Boolean status=output.getString("status").equals("success");
+						
+					}
+				response.sendRedirect("projectsummary2");
+				
+				else{
+					response.sendRedirect("userhome");
+					//return new ModelAndView("userhome");
+				}
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}	
+			
+			response.sendRedirect("userhome");
+			//return new ModelAndView("userhome");
+		} catch (Exception e) {
+			logger.error("@UserHomeController/projectformsubmit :"+e.getMessage());
+		}	
+		
+	}
+*/
+	
+	}

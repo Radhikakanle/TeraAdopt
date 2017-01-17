@@ -187,7 +187,9 @@ public class ProjectDashboardController {
 			if(output!=null){
 				Boolean status=output.getString("status").equals("success");
 				if(status){
+					
 					JSONArray result=output.getJSONArray("reponse");
+					System.out.println(result);
 					response.setContentType("application/json");
 					response.getWriter().write(result.toString());
 				}

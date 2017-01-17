@@ -17,7 +17,7 @@ $(document).ready(function() {
 			output += '<th>No. of Test Cases</th>';
 			output += '<th>Passed</th>';
 			output += '<th>Failed</th>';
-			output += '<th>Status</th>';
+			/*output += '<th>Status</th>';*/
 			output += '</tr>';
 			output += '</thead>';
 			output += '<tbody>';
@@ -29,7 +29,7 @@ $(document).ready(function() {
 				output += '<td>' + response[i].passedCount +'</td>';
 				output += '<td>' + response[i].failedCount +'</td>';
 			
-				if (response[i].failedCount==0){
+			/*	if (response[i].failedCount==0){
 					status="Passed";
 					output += '<td style="color:green"><b>' + status +'</b></td>';	
 				}
@@ -37,7 +37,7 @@ $(document).ready(function() {
 					status="Failed";
 					output += '<td><b>' + status +'</b></td>';	
 				}			
-		
+		*/
 				output += '</tr>';
 			
 			}
@@ -61,9 +61,9 @@ $(document).ready(function() {
 			output += '<th>No. of Test Cases</th>';
 			output += '<th>Passed</th>';
 			output += '<th>Failed</th>';
-			output += '<th>Duration</th>';
+			output += '<th>Duration(in MS)</th>';
 			output += '<th>Environment</th>';
-			output += '<th>Status</th>';
+			/*output += '<th>Status</th>';*/
 			output += '</tr>';
 			output += '</thead>';
 			output += '<tbody>';
@@ -77,7 +77,7 @@ $(document).ready(function() {
 				output += '<td>' + data[i].failedCount +'</td>';
 				output += '<td>' + data[i].duration +'</td>';
 				output += '<td>' + data[i].environment +'</td>';
-			
+			/*
 				if (data[i].failedCount==0){
 					status="Passed";
 					output += '<td style="color:green">' + status +'</td>';	
@@ -85,7 +85,7 @@ $(document).ready(function() {
 				else{
 					status="Failed";
 					output += '<td>' + status +'</td>';	
-				}			
+				}			*/
 		
 				output += '</tr>';
 			}

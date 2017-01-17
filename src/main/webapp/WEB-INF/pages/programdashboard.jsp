@@ -36,6 +36,13 @@
 <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
 <script src="resources/assets/js/skins.min.js"></script>
 
+
+<style>
+	body.modal fade{
+   		padding-right: 0 !important; // not important
+   		position: relative;
+	}
+</style>
 </head>
 <body>
 	<!-- <div class="loading-container">
@@ -124,15 +131,15 @@
                 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 			<div class="widget">
 								<div class="widget-header">
-									<span class="widget-caption">Program Report</span>
-									<div class="widget-buttons">
+									<span id="widget-caption-id" class="widget-caption">Program Report</span>
+									<!-- <div class="widget-buttons">
 										<a href="#" data-toggle="collapse">
                                         	<i class="fa fa-minus"></i>
                                         </a>
                                         <a href="#" data-toggle="dispose">
                                         	<i class="fa fa-times"></i>
                                         </a>										
-									</div>
+									</div> -->
 								</div>
 								<div class="widget-body">
 									<div id="portfoliochart" class="chartcontainer">
@@ -147,24 +154,6 @@
 									<div id="portfoliochart4" class="chartcontainer">
 										<canvas id="portfolio4"></canvas>
 									</div>
-								</div>
-							</div>
-                		</div>
-                		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                			<div class="widget">
-								<div class="widget-header">
-									<span class="widget-caption">Project Status(Based on CodeQuality)</span>
-									<div class="widget-buttons">
-										<a href="#" data-toggle="collapse">
-                                        	<i class="fa fa-minus"></i>
-                                        </a>
-                                        <a href="#" data-toggle="dispose">
-                                        	<i class="fa fa-times"></i>
-                                        </a>										
-									</div>
-								</div>
-								<div class="widget-body">
-									<div id="projectstatustable" style="height: 252px;"></div>									
 								</div>
 							</div>
                 		</div>
@@ -208,9 +197,44 @@
 								</div>
 							</div>
     					</div>
+    					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                			<div class="widget">
+								<div class="widget-header">
+									<span class="widget-caption">Project Status(Based on CodeQuality)</span>
+									<div class="widget-buttons">
+										<a href="#" data-toggle="collapse">
+                                        	<i class="fa fa-minus"></i>
+                                        </a>
+                                        <a href="#" data-toggle="dispose">
+                                        	<i class="fa fa-times"></i>
+                                        </a>										
+									</div>
+								</div>
+								<div class="widget-body">
+									<div id="projectstatustable" style="height: 252px;"></div>									
+								</div>
+							</div>
+                		</div>
                 	</div>
         		</div>
         	</div>
+		</div>	
+	</div>
+	
+	<div id="IssuesModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 id="modaltitle" class="modal-title">Issues</h3>
+				</div>
+				<div class="modal-body">
+					<div id="issuestablearea"></div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	

@@ -70,9 +70,11 @@ $(document).ready(function() {
 					}
 					$('#portfoliochart').hide();
 					$('#portfoliochart2').show();
-					$('#portfoliochart2 h2').text(status +" Projects");
-					var glyph1='<a id="pcanchor1"><span style="float: right;" class="glyphicon glyphicon-remove-sign"></span></a>';
-			   		$('#portfoliochart2 h2').append(glyph1);
+					$('#widget-caption-id').text(status +" Projects");
+					//var glyph1='<a id="pcanchor1"><span style="float: right;" class="glyphicon glyphicon-remove-sign"></span></a>';
+					var glyph1='<div class="widget-buttons"><a id="pcanchor1"><i class="fa fa-arrow-left"></i></a></div>'
+			   		//$('#portfoliochart2 h2').append(glyph1);
+					$('#widget-caption-id').append(glyph1);
 					//$('#portfolio2').show();
 					var projcomp=[];
 					var totalissues=0,compissues=0,releasecomp=0;
@@ -143,6 +145,7 @@ $(document).ready(function() {
 						$('#portfolio2').remove();
 						var canvas = document.createElement("canvas");
 						canvas.setAttribute("id","portfolio2");
+						$('#widget-caption-id').text("Program Report");
 						$('#portfoliochart2').append(canvas);
 						$('#portfoliochart2').hide();
 						$('#portfoliochart').show();
@@ -166,11 +169,14 @@ $(document).ready(function() {
 							//$('#portfolio2').hide();
 							$('#portfoliochart2').hide();
 							$('#portfoliochart3').show();
-							$('#portfoliochart3 h2').text("Releases of Project - " +project );
+							//$('#portfoliochart3 h2').text("Releases of Project - " +project );
+							$('#widget-caption-id').text("Releases of Project - " +project );
 							
-							var rglyph1='<a id="remover1"><span style="float: right; padding-left: 20px;" class="glyphicon glyphicon-remove-sign"></span></a>';
-							var glyph2='<a id="pcanchor2"><span style="float: right;" class="glyphicon glyphicon-arrow-left"></span></a>';
-					   		$('#portfoliochart3 h2').append(rglyph1,glyph2);							
+							//var rglyph1='<a id="remover1"><span style="float: right; padding-left: 20px;" class="glyphicon glyphicon-remove-sign"></span></a>';
+							//var glyph2='<a id="pcanchor2"><span style="float: right;" class="glyphicon glyphicon-arrow-left"></span></a>';
+							var rglyph1='<div class="widget-buttons"><a id="pcanchor2"><i class="fa fa-arrow-left"></i></a><a id="remover1"><i class="fa fa-times"></i></a></div>';
+					   		//$('#portfoliochart3 h2').append(rglyph1,glyph2);		
+							$('#widget-caption-id').append(rglyph1);	
 							
 							//$('#portfolio3').show();
 							for(var i in releasesofproject){
@@ -246,9 +252,25 @@ $(document).ready(function() {
 								$('#portfolio3').remove();
 								var canvas = document.createElement("canvas");
 								canvas.setAttribute("id","portfolio3");
+								$('#widget-caption-id').text(status +" Projects");
+								var glyph1='<div class="widget-buttons"><a id="pcanchor1"><i class="fa fa-arrow-left"></i></a></div>'
+								$('#widget-caption-id').append(glyph1);
 								$('#portfoliochart3').append(canvas);
 								$('#portfoliochart3').hide();
 								$('#portfoliochart2').show();
+								
+								$('#pcanchor1').click(function(){
+									$('#portfolio2').remove();
+									var canvas = document.createElement("canvas");
+									canvas.setAttribute("id","portfolio2");
+									$('#widget-caption-id').text("Program Report");
+									$('#portfoliochart2').append(canvas);
+									$('#portfoliochart2').hide();
+									$('#portfoliochart').show();
+									$('#projectstatuschart').show();
+									$('#releasestatuschart').show();
+									$('#openissuesdiv').show();
+								});
 							});
 							$("#remover1").click(function(){
 								$('#portfolio3').remove();
@@ -264,6 +286,7 @@ $(document).ready(function() {
 								$('#projectstatuschart').show();
 								$('#releasestatuschart').show();
 								$('#openissuesdiv').show();
+								$('#widget-caption-id').text("Program Report");
 							});
 							
 							$("#portfolio3").click(
@@ -278,12 +301,14 @@ $(document).ready(function() {
 									//$('#portfolio3').hide();
 									$('#portfoliochart3').hide();
 									$('#portfoliochart4').show();
-									$('#portfoliochart4 h2').text("Sprints of Release - " +release+" (Project - "+project+")" );
+									//$('#portfoliochart4 h2').text("Sprints of Release - " +release+" (Project - "+project+")" );
+									$('#widget-caption-id').text("Sprints of Release - " +release+" (Project - "+project+")");
 									//$('#portfolio4').show();
 									
-									var rglyph2='<a id="remover2"><span style="float: right; padding-left: 20px;" class="glyphicon glyphicon-remove-sign"></span></a>';
-									var glyph3='<a id="pcanchor3"><span style="float: right;" class="glyphicon glyphicon-arrow-left"></span></a>';
-							   		$('#portfoliochart4 h2').append(rglyph2,glyph3);
+									//var rglyph2='<a id="remover2"><span style="float: right; padding-left: 20px;" class="glyphicon glyphicon-remove-sign"></span></a>';
+									//var glyph3='<a id="pcanchor3"><span style="float: right;" class="glyphicon glyphicon-arrow-left"></span></a>';
+									var glyph3='<div class="widget-buttons"><a id="pcanchor3"><i class="fa fa-arrow-left"></i></a><a id="remover2"><i class="fa fa-times"></i></a></div>';
+							   		$('#widget-caption-id').append(glyph3);
 									
 									for(var i in sprintsperrelease){
 										var p3sprint=sprintsperrelease[i];
@@ -340,9 +365,53 @@ $(document).ready(function() {
 										$('#portfolio4').remove();
 										var canvas = document.createElement("canvas");
 										canvas.setAttribute("id","portfolio4");
+										$('#widget-caption-id').text("Releases of Project - " +project );
+										var rglyph1='<div class="widget-buttons"><a id="pcanchor2"><i class="fa fa-arrow-left"></i></a><a id="remover1"><i class="fa fa-times"></i></a></div>';
+										$('#widget-caption-id').append(rglyph1);
 										$('#portfoliochart4').append(canvas);
 										$('#portfoliochart4').hide();
 										$('#portfoliochart3').show();
+										
+										$('#pcanchor2').click(function(){
+											$('#portfolio3').remove();
+											var canvas = document.createElement("canvas");
+											canvas.setAttribute("id","portfolio3");
+											$('#widget-caption-id').text(status +" Projects");
+											var glyph1='<div class="widget-buttons"><a id="pcanchor1"><i class="fa fa-arrow-left"></i></a></div>'
+											$('#widget-caption-id').append(glyph1);
+											$('#portfoliochart3').append(canvas);
+											$('#portfoliochart3').hide();
+											$('#portfoliochart2').show();
+											
+											$('#pcanchor1').click(function(){
+												$('#portfolio2').remove();
+												var canvas = document.createElement("canvas");
+												canvas.setAttribute("id","portfolio2");
+												$('#widget-caption-id').text("Program Report");
+												$('#portfoliochart2').append(canvas);
+												$('#portfoliochart2').hide();
+												$('#portfoliochart').show();
+												$('#projectstatuschart').show();
+												$('#releasestatuschart').show();
+												$('#openissuesdiv').show();
+											});
+										});
+										$("#remover1").click(function(){
+											$('#portfolio3').remove();
+											var canvas = document.createElement("canvas");
+											canvas.setAttribute("id","portfolio3");
+											$('#portfoliochart3').append(canvas);
+											$('#portfolio2').remove();
+											var canvas2 = document.createElement("canvas");
+											canvas2.setAttribute("id","portfolio2");
+											$('#portfoliochart2').append(canvas2);
+											$('#portfoliochart3').hide();
+											$('#portfoliochart').show();
+											$('#projectstatuschart').show();
+											$('#releasestatuschart').show();
+											$('#openissuesdiv').show();
+											$('#widget-caption-id').text("Program Report");
+										});
 									});
 									$('#remover2').click(function(){
 										$('#portfolio4').remove();
@@ -362,6 +431,7 @@ $(document).ready(function() {
 										$('#projectstatuschart').show();
 										$('#releasestatuschart').show();
 										$('#openissuesdiv').show();
+										$('#widget-caption-id').text("Program Report");
 									});
 									
 									$("#portfolio4").click(
@@ -396,7 +466,7 @@ $(document).ready(function() {
 											output +='<table class="table table-bordered" id="issuestable">';
 											output += '<thead>';
 											output += '<tr>';
-											output += '<th>Issue Name</th>';
+											output += '<th>Task Name</th>';
 											output += '<th>Description</th>';
 											output += '<th>Status</th>';
 											output += '<th>Assigned To</th>';
@@ -439,7 +509,7 @@ $(document).ready(function() {
 											
 											output += '</tbody>';
 											output += ' </table>';
-											$('#modaltitle').text(sprint+" - Issues");
+											$('#modaltitle').text(sprint+" - Tasks");
 											$('#IssuesModal').modal('show');
 											document.getElementById("issuestablearea").innerHTML = output;
 									});
@@ -550,7 +620,8 @@ $(document).ready(function() {
 	                    position: 'bottom',
 	                    labels:{
 	                 	   generateLabels: function(chart){
-	                 		   var labels=[{"text": "Completed" , "fillStyle": "#33cc33"},{"text": "In Progress" , "fillStyle": "#ffff80"}, {"text": "Not Started" , "fillStyle": "#6666ff"}];
+	                 		   /*var labels=[{"text": "Completed" , "fillStyle": "#33cc33"},{"text": "In Progress" , "fillStyle": "#ffff80"}, {"text": "Not Started" , "fillStyle": "#6666ff"}];*/
+	                 		  var labels=[{"text": "Completed" , "fillStyle": "#33cc33"},{"text": "In Progress" , "fillStyle": "#ffff80"}];
 	                 		   return labels;
 	                 	   }
 	                    }
@@ -588,7 +659,7 @@ $.get('codeQualityProject',function ccp(data){
 	output += '<tbody>';
 	for(var i in projects){
 		var project=projects[i];
-		output += '<tr data-toggle="tooltip" data-project="'+project+'" data-critical="'+data[project].criticalIssues+'" data-major="'+data[project].majorIssues+'" data-blocker="'+data[project].blockerlIssues+'">';
+		output += '<tr class="tableRow" data-toggle="tooltip" data-project="'+project+'" data-critical="'+data[project].criticalIssues+'" data-major="'+data[project].majorIssues+'" data-blocker="'+data[project].blockerlIssues+'">';
 		output += '<td><b>' + project +'</b></td>';
 		if(data[project].projectStatus == "amber")
 			output += '<td class="warning">Good</td>';
@@ -606,6 +677,27 @@ $.get('codeQualityProject',function ccp(data){
 	document.getElementById("projectstatustable").innerHTML = output;
 });
 
+
+$('body').on('mouseenter','.tableRow',function(){
+	var critical=$(this).data("critical");
+	var major=$(this).data("major");
+	var blocker=$(this).data("blocker");
+	
+	if(critical=="undefined")
+		critical=0;
+	if(major=="undefined")
+		major=0;
+	if(blocker=="undefined")
+		blocker=0;
+	
+	$(this).tooltip({
+		title: '<h5>'+$(this).data("project")+'</h5><p><b style="color:red">Critical Issues</b>:'+critical+'<br><b style="color:yellow">Major Issues</b>:'+major+'<br><b style="color:blue">Blocker Issues</b>:'+blocker+'</p>',
+        html:true,
+        placement: 'bottom',
+        container: 'body',
+        trigger: 'hover'
+	}).tooltip('show');
+});
 
 /*	});
 });*/
