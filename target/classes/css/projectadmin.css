@@ -1,0 +1,199 @@
+#admin-area {
+	margin-top: 50px;
+}
+
+#projcetmembers {
+	width: 100%;
+	padding: 0px;
+	text-align: center;
+	border: 0px;
+	position: inherit;
+	margin-top: -10px;
+}
+
+#projcetmembers th {
+	text-align: center;
+	background: #f6f8f9; /* Old browsers */
+	background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9',
+		endColorstr='#f5f7f9', GradientType=0);
+	font-size: 15px;
+	color: #757575;
+	border-right: 1px solid;
+	border-color: #d7d7d7;
+}
+
+#projcetmembers tr:nth-child(odd) td {
+	 /* Old browsers */
+	border: 1px solid;
+	border-color: #d7d7d7;
+	font-size: 14px;
+	height: 20px;
+} /*odd*/
+#projcetmembers tr:nth-child(even) td {
+	
+	border: 1px solid;
+	border-color: #d7d7d7;
+	font-size: 14px;
+	height: 20px;
+} /* even*/
+#apptable {
+	width: 100%;
+	padding: 0px;
+	text-align: center;
+	border: 0px;
+	position: inherit;
+	margin-top: -10px;
+}
+
+#apptable th {
+	text-align: center;
+	background: #f6f8f9; /* Old browsers */
+	background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%,
+		#f5f7f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9',
+		endColorstr='#f5f7f9', GradientType=0);
+	font-size: 15px;
+	color: #757575;
+	border-right: 1px solid;
+	border-color: #d7d7d7;
+}
+
+#apptable tr:nth-child(odd) td {
+	
+	border: 1px solid;
+	border-color: #d7d7d7;
+	font-size: 14px;
+	height: 20px;
+} /*odd*/
+#apptable tr:nth-child(even) td {
+	
+	border: 1px solid;
+	border-color: #d7d7d7;
+	font-size: 14px;
+	height: 20px;
+} /* even*/
+.UserTab {
+	margin: 2% auto;
+	border: 1px solid #cccccc;
+	width: 70%;
+	height: auto;
+	box-shadow: 0 0 18px rgba(130, 121, 121, 0.79);
+}
+
+.UserTab h1 {
+	text-align: left;
+	margin-top: 0px;
+	margin-left: 0px;
+	height: 30px;
+	font-family: Rockwell;
+	line-height: 20px;
+	font-size: 18px;
+	color: #000;
+	background-color: #FF9900;
+	padding-top: 4px;
+	padding-left: 16px;
+}
+
+}
+.UserTab h1 span {
+	
+}
+
+select[multiple], select[size] {
+	height: 100px;
+	width: 70%;
+	margin-left: 5%;
+	margin-top: 1%;
+}
+
+.AppTab {
+	margin: 5% auto;
+	border: 1px solid #cccccc;
+	width: 70%;
+	height: auto;
+	box-shadow: 0 0 18px rgba(130, 121, 121, 0.79);
+}
+
+.AppTab h1 {
+	text-align: left;
+	margin-top: 0px;
+	margin-left: 0px;
+	height: 30px;
+	font-family: Rockwell;
+	line-height: 20px;
+	font-size: 18px;
+	color: #000;
+	background-color: #FF9900;
+	padding-top: 4px;
+	padding-left: 16px;
+}
+
+.glyphicon {
+	top: 3px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	height: 0px;
+	width: 20px;
+	padding-top: 0px;
+	font-size: 18px
+}
+
+#AddUserModal {
+	margin: 5% auto;
+}
+
+#EditUserModal {
+	margin: 5% auto;
+}
+
+#AddAppModal {
+	margin: 5% auto;
+}
+
+#EditAppModal {
+	margin: 5% auto;
+}
+
+.step1 h3 {
+	margin-top: -4px;
+	font-size: 18px;
+}
+
+.step2 h3 {
+	margin-top: -4px;
+	font-size: 18px;
+}
+
+.step3 h3 {
+	margin-top: -4px;
+	font-size: 18px;
+}
+
+.saveButton, [contenteditable] .editButton {
+	display: none;
+	background: none;
+	border: none;
+}
+
+.editButton, [contenteditable] .saveButton {
+	display: inline; /* For IE */
+	display: inline-block;
+	background: none;
+	border: none;
+}
+
+[contenteditable] {
+	color: #0B3F65;
+	text-decoration: italic;
+	background: #ddd;
+}
