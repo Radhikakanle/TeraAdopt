@@ -191,6 +191,8 @@
 							target="iframe">Bit Bucket</a></li>
 							<li><a id="sonar" href="#"
 							target="iframe">Sonarqube</a>
+							<li><a id="nexus" href="#"
+							target="iframe">Nexus</a>
 						<li><a id="tomcat" href="#"
 							target="iframe"><%=session.getAttribute("currentProject").toString()%></a></li>
 							
@@ -199,9 +201,11 @@
 							
 							<li><a id="ABP" data-toggle="modal"
 						target="content">AutoBuild Promotion</a></li>
+						<li><a id="confluence" href="#" target="iframe">Confluence</a></li>
 							
 							
 <li> ${rp.pageName}</li>
+
 					</ul>
 
 				</div>
@@ -225,13 +229,21 @@
 					
 						</div>
 
-					<input type="submit" id="subPromotion" name="startBuild"
+					<!-- <input type="submit" id="subPromotion" name="startBuild"
 						value="Promote" class="btn btn-primary"
 						onClick="return confirm('Are you sure you want to deploy the selected build ?')">
+					 -->
+					 
+	<!-- Button to perform auto build promotion -->	
+						
+<!-- 						<a href="#BUILDModal1" id="alltasks" class="btn btn-md btn-success" data-toggle="modal">Tasks</a> -->
+
+ <!-- Button to get tasks list in the build -->
+						
 						
 				</form>
 				
-				<form id="form-id" action = "taskHistory">
+				<form id="form-id" action = "DepBuild">
 				<div id="predeploys" style="width:650px"> </div>
 				</form>
 			</div>
@@ -541,13 +553,90 @@
 				</frame>
 			</div>
 		</div>
+			</div>
+			
+			<div id="BUILDModal1" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Tasks in the Build</h4>
+				</div>
+				<div class="modal-body">
+					
 
 
+					
+					
+					
+					
+					
+					
+					<form action="buildpipeline">
+					<div id="score1"
+						style="resize: both; border: 2px solid green; overflow: auto; height: 300px;"
+						hidden></div>
+						
+					
+					<!-- <th>
+					Build
+					</th>
+					<tr>
+					<td><input type="submit" name="buildId" value="1.0.0.1579"/> </td> 
+					</tr>
+					-->
+					
+					</div>
+				
+				
+					
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<div id="BUILDModal2" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Deployed Environments</h4>
+				</div>
+				<div class="modal-body">
+				<form action="deployInEnv">
+				<div id="envdiv">
+				
+				
+				</div>
+</form>
 
-
-
-
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</div>
+	
 
 	<!--Basic Scripts-->
 	<script src="resources/assets/js/jquery.min.js"></script>
@@ -804,6 +893,9 @@ $(document).ready( function() {
 	  $('#sonar').attr('href',value.sonar);
 	  $('#tomcat').attr('href',value.tomcat+"<%=session.getAttribute("currentProject").toString()%>");
 	  $('#testlink').attr('href',value.testlink);
+	  $('#nexus').attr('href',value.nexus);
+	  $('#confluence').attr('href',value.confluence);
+	  
   });
  });
 });
@@ -856,6 +948,18 @@ $(document).ready( function() {
 				$("#reports").hide();
 				$("#iframe").hide();
 			});
+			
+			$("#nexus").click(function() {
+				$("#iframe").show();
+				$("#reports").hide();
+				$("#BUILDModal").hide();
+			});
+			$("#confluence").click(function() {
+				$("#iframe").show();
+				$("#reports").hide();
+				$("#BUILDModal").hide();
+			});
+			
 		});
 	</script>
 

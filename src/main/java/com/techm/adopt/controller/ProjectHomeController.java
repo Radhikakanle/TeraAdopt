@@ -270,6 +270,8 @@ public class ProjectHomeController {
 			System.out.println("return of triggering jenkins url:"+restTemplate.getForObject(url,String.class));*/
 			String trun = Constants.TRUNCATE_TABLE+projectname;
 			JSONObject output1= restClientService.getOutputFromURL(trun);
+			
+			
 			String url=Constants.AUTOBUILD_URL+projectname+"/"+bid;
 			JSONObject output= restClientService.getOutputFromURL(url);
 			
@@ -442,7 +444,116 @@ public class ProjectHomeController {
 	}
 	
 	
+	@RequestMapping(value="/DepBuild", method=RequestMethod.GET)
+	public ModelAndView depBuild(HttpServletRequest request,HttpServletResponse response){
+		String projectname=session.getAttribute("currentProject").toString();
+		System.out.println("inside controller");
+		String bid=request.getParameter("buildid");
+		if(bid!=null){
+			/*String parameter= projectname+"_VERSION";
+			String url="http://172.19.82.18:8080/job/"+projectname+"_UAT"+"/buildWithParameters?"+parameter+"="+bid;
+			  
+			RestTemplate restTemplate=new RestTemplate();
+			
+			System.out.println("return of triggering jenkins url:"+restTemplate.getForObject(url,String.class));*/
+			String trun = Constants.TRUNCATE_TABLE+projectname;
+			JSONObject output1= restClientService.getOutputFromURL(trun);
+			String url=Constants.AUTOBUILD_URL+projectname+"/"+bid;
+			JSONObject output= restClientService.getOutputFromURL(url);
+			
+			if(output!=null){
+				Boolean status=(Boolean) output.get("status").equals("success");
+				if(status){
+					try {
+						Thread.sleep(10000);
+					}
+					catch(Exception e)
+					{
+						System.out.println(e);
+					}
+					return new ModelAndView("temp");
+					}
+				else {
+					return new ModelAndView("temp");
+				}
+			
+			
+	   }
+			return new ModelAndView("temp");
+		}
+	   else{
+			return new ModelAndView("temp","errmsg","please select valid Id");
+	   }
+	}
 	
+	
+	
+	
+	
+	@RequestMapping(value="/deployedEnvironments", method=RequestMethod.POST) //to get the environments where app deployed
+	public void deployedEnvironments(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("deployed Environments");
+		String projectname=session.getAttribute("currentProject").toString();
+		String bid=request.getParameter("name");
+		System.out.println(bid);
+		String url="http://10.53.67.35:8180/NewCXF-RS-SH/services/deploy/deployEnv/"+projectname+"/"+bid;
+		JSONObject output= restClientService.getOutputFromURL(url);
+		if(output!=null){
+			System.out.println("output is not null");
+			Boolean status=(Boolean) output.get("status").equals("success");
+			if(status){
+				System.out.println("status is not null");
+				JSONObject result=output.getJSONObject("reponseMap");
+				JSONArray array=result.getJSONArray("response");
+				response.setContentType("application/json");
+				try {
+					response.getWriter().write(array.toString());
+				} catch (IOException e) {
+					logger.error("@DeploymentReportsController:Task Details :"+e.getMessage());
+				}
+			}
+		}
+	}
+	
+	
+	@RequestMapping(value="/deployInEnv", method=RequestMethod.GET)
+	public void deployInEnv(HttpServletRequest request,HttpServletResponse response){
+		String projectname=session.getAttribute("currentProject").toString();
+		System.out.println("inside controller");
+	String bid=request.getParameter("buildid");
+	Object env =  request.getAttribute("id");
+	System.out.println((String)env);
+	
+	System.out.println("bid is"+bid);
+		System.out.println("inside deploy Environment sep");
+		//if(bid!=null){
+			/*String parameter= projectname+"_VERSION";
+			String url="http://172.19.82.18:8080/job/"+projectname+"_UAT"+"/buildWithParameters?"+parameter+"="+bid;
+			  
+			RestTemplate restTemplate=new RestTemplate();
+			
+			System.out.println("return of triggering jenkins url:"+restTemplate.getForObject(url,String.class));*/
+			
+			//String url="http://10.53.67.35:8180/NewCXF-RS-SH/services/deploy/deployApplication/"+projectname+"/"+"2.0.0.78"+"/"+"UAT";
+		String url = Constants.DEP_IN_ENV+projectname+"/"+bid;
+		System.out.println(url);
+			JSONObject output= restClientService.getOutputFromURL(url);
+			
+			if(output!=null){
+				Boolean status=(Boolean) output.get("status").equals("success");
+				if(status){
+					
+			try {
+				response.sendRedirect("http://172.19.81.113:9093/jenkins/view/Tera_Adopt_UAT/?fullscreen=true");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	  // }
+			}
+	   }
+}
 	
 	
 	
