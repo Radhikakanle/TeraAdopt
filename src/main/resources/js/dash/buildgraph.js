@@ -399,8 +399,6 @@ function taskHistory(k) {
 
 
 
-
-
 function deployInEnv(k) {
 	$("#envdiv").show();
 //	$("#alltasks")[0].click();
@@ -477,7 +475,7 @@ function deployInEnv(k) {
 						 
 						document.getElementById("envdiv").innerHTML = output;
 //						document.getElementById("tasksdivision").innerHTML = output;
-						
+
 					}
 				},
 				error : function() {
